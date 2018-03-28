@@ -3,13 +3,15 @@
 use int::{Int, CastInto};
 use float::Float;
 
-#[derive(Clone, Copy)]
 enum Result {
     Less,
     Equal,
     Greater,
     Unordered
 }
+
+impl Copy for Result {}
+impl Clone for Result { fn clone(&self) -> Self { *self } }
 
 impl Result {
     fn to_le_abi(self) -> i32 {

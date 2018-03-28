@@ -6,6 +6,9 @@ version = "0.1.0"
 [lib]
 test = false
 
+[dependencies]
+core = { path = "test/libcore" }
+
 [build-dependencies]
 cc = { optional = true, version = "1.0" }
 

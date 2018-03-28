@@ -131,10 +131,19 @@ intrinsics! {
     }
 }
 
-#[derive(PartialEq)]
 enum Sign {
     Positive,
     Negative
+}
+
+impl PartialEq for Sign {
+    fn eq(&self, rhs: &Sign) -> bool {
+        match (self, rhs) {
+            (&Sign::Positive, &Sign::Positive) |
+            (&Sign::Negative, &Sign::Negative) => true,
+            _ => false,
+        }
+    }
 }
 
 macro_rules! float_to_int {

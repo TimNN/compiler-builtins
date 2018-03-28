@@ -1,5 +1,5 @@
-#![cfg_attr(not(stage0), deny(warnings))]
-#![cfg_attr(not(test), no_std)]
+// #![cfg_attr(not(stage0), deny(warnings))]
+// #![cfg_attr(not(test), no_std)]
 #![cfg_attr(feature = "compiler-builtins", compiler_builtins)]
 #![crate_name = "compiler_builtins"]
 #![crate_type = "rlib"]
@@ -26,6 +26,10 @@
                      reason = "Compiler builtins. Will never become stable.",
                      issue = "0"))]
 
+#![feature(prelude_import)]
+#![feature(no_core)]
+#![no_core]
+
 // We disable #[no_mangle] for tests so that we can verify the test results
 // against the native compiler-rt implementations of the builtins.
 
@@ -36,8 +40,12 @@
 // that follow "x86 naming convention" (e.g. addsf3). Those aeabi intrinsics must adhere to the
 // AAPCS calling convention (`extern "aapcs"`) because that's how LLVM will call them.
 
-#[cfg(test)]
+// #[cfg(test)]
 extern crate core;
+
+#[prelude_import]
+#[allow(unused_imports)]
+use core::prelude::v1::*;
 
 fn abort() -> ! {
     unsafe { core::intrinsics::abort() }
