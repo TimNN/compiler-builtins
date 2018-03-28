@@ -27,7 +27,7 @@ fn get_shift_mask<T>(ptr: *mut T) -> (u32, u32) {
         1 => 0xff,
         2 => 0xffff,
         4 => 0xffffffff,
-        _ => unreachable!(),
+        _ => unsafe { intrinsics::unreachable() },
     };
 
     // If we are on big-endian then we need to adjust the shift accordingly

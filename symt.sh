@@ -23,8 +23,8 @@ while IFS= read -r target; do
 
     undefined="$(
         diff --new-line-format="" --unchanged-line-format="" \
-            <(nm "$lib_path" | cut -c10- | grep -i '^u' | cut -c3- | sort -u) \
-            <(nm "$lib_path" | cut -c10- | grep -i '^t' | cut -c3- | sort -u) \
+            <(nm "$lib_path" 2>/dev/null | cut -c10- | grep -i '^u' | cut -c3- | sort -u) \
+            <(nm "$lib_path" 2>/dev/null | cut -c10- | grep -i '^t' | cut -c3- | sort -u) \
             || true)"
 
     if [ -n "$undefined" ]; then
